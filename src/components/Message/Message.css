@@ -33,3 +33,31 @@
     flex-direction: row;
     justify-content: space-around;
 }
+
+.message-details strong{
+    cursor: pointer;
+}
+
+.message-details strong:hover{
+    text-decoration: underline;
+}
+
+.alert-profile{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.alert-profile img{
+    border-radius: 20px;
+    margin: 0;
+    padding: 0;
+    width: 100px;
+}
+
+.alert-details{
+    flex: 1;
+    text-align: left;
+}

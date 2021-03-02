@@ -1,0 +1,33 @@
+.direct-message{
+    flex: 1;
+    list-style: none;
+    text-align: start;
+}
+
+.direct-message-item{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.direct-message-item:hover{
+    filter: brightness(0.9)
+}
+
+.direct-message-item img{
+    width: 80px;
+    height: 80px;
+    border-radius: 20px
+}
+
+.dm-preview{
+    flex: 1;
+}
+
+hr{
+    margin: 0;
+}

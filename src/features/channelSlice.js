@@ -5,22 +5,23 @@ export const channelSlice = createSlice({
   initialState: {
     channelId: null,
     channelName: null,
-    channelUsers: [],
   },
   reducers: {
     setChannel: (state, action) => {
       state.channelId = action.payload.channelId;
       state.channelName = action.payload.channelName;
-      state.channelUsers = action.payload.channelUsers;
+    },
+    closeChannel: (state) => {
+      state.channelId = null;
+      state.channelName = null;
     },
   },
 });
 
-export const { setChannel } = channelSlice.actions;
+export const { setChannel, closeChannel } = channelSlice.actions;
 
 export const selectChannelId = state => state.channel.channelId;
 export const selectChannelName = state => state.channel.channelName;
-export const selectChannelUsers = state => state.channel.channelUsers;
 
 
 export default channelSlice.reducer;

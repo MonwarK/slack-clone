@@ -16,6 +16,8 @@ import { useDispatch } from 'react-redux';
 import { setChannel } from '../../features/channelSlice';
 import AlertBox from "../Alert/Alert"
 import alert from '../Alert/Alert';
+import { useHistory } from 'react-router-dom';
+import { closeChat } from '../../features/dmSlice';
 
 function SideNav() {
 
@@ -24,6 +26,7 @@ function SideNav() {
     const [users, setusers] = useState([])
     const [alertBox, setAlertBox] = useState(false)
     const [channelName, setChannelName] = useState("")
+    const history = useHistory()
 
     useEffect(() => {
         db.collection("channels").onSnapshot(
@@ -86,7 +89,7 @@ function SideNav() {
                         <span>Thread</span>
                     </SideButton>
 
-                    <SideButton>
+                    <SideButton link={() => { dispatch(closeChat()); history.push("/messages")}}>
                         <InboxIcon />
                         <span>All DMs</span>
                     </SideButton>
@@ -121,7 +124,7 @@ function SideNav() {
                     <ul className="list-group">
                         {
                             users.map(({id, channel}) => {
-                                return <li className="my-1 channel-item">
+                                return <li className="my-1 channel-item" onClick={() => history.push("/")}>
                                     <label
                                         className="group-item mx-3"
                                         onClick={() => dispatch(setChannel({
@@ -142,8 +145,6 @@ function SideNav() {
                                                     .collection("channels")
                                                     .doc(id)
                                                     .delete()
-
-                                                    window.location.reload()
                                                 }
                                             }
                                         />

@@ -10,6 +10,7 @@ import Home from './screens/Home/Home';
 import ForgotPassword from "./screens/ForgotPassword/ForgotPassword"
 import Loading from "./screens/Loading/Loading"
 import Invite from "./screens/AcceptInvite/Loading"
+import { closeChannel } from './features/channelSlice';
 
 function App() {
   const user = useSelector(selectUser)
@@ -35,6 +36,7 @@ function App() {
           dispatch(logout())
         }
 
+        dispatch(closeChannel())
         setLoading(false)
       }
     )
@@ -80,6 +82,9 @@ function App() {
           <div>
             <Switch>
               <Route path="/" exact>
+                <Home changeTheme={changeTheme} />
+              </Route>
+              <Route path="/messages" exact>
                 <Home changeTheme={changeTheme} />
               </Route>
               <Route path="/invite/:groupCode" component={Invite}/>

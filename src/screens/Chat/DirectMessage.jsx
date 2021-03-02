@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import firebase from "firebase"
 import "./Chat.css"
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../../firebase/Firebase';
 import { selectChannelId, selectChannelName, selectChannelUsers } from '../../features/channelSlice';
 import { selectUser } from '../../features/userSlice';
@@ -11,30 +11,27 @@ import FlashOnIcon from '@material-ui/icons/FlashOn';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import Alert from "../../components/Alert/Alert"
 import Picker from 'emoji-picker-react';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import alert from '../../components/Alert/Alert';
+import { closeChat, selectChatId, selectUserName } from '../../features/dmSlice';
 
 function Chat() {
 
-    const channelId = useSelector(selectChannelId)
-    const channelName = useSelector(selectChannelName)
+    const chatId = useSelector(selectChatId)
+    const toUser = useSelector(selectUserName)
     const user = useSelector(selectUser)
     const [messages, setmessages] = useState([])
     const [message, setmessage] = useState("")
-    const [alertBox, setAlertBox] = useState("")
     const [emoji, setemoji] = useState(false)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if(!channelId){
+        if(!chatId){
             return;
         }
 
         db
-        .collection("channels")
-        .doc(channelId)
+        .collection("messages")
+        .doc(chatId)
         .collection("messages")
         .orderBy("timestamp", "desc")
         .onSnapshot(snapshot => {
@@ -46,7 +43,7 @@ function Chat() {
             )
         })
 
-    }, channelId)
+    }, chatId)
 
     const sendMessage = e => {
 
@@ -54,7 +51,11 @@ function Chat() {
 
         if(message){
             if(message.length <= 300){
-                db.collection("channels").doc(channelId).collection("messages").add({
+                db
+                .collection("messages")
+                .doc(chatId)
+                .collection("messages")
+                .add({
                     user: user,
                     message: message,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -75,7 +76,11 @@ function Chat() {
     const addImage = () => {
         const imageUrl = prompt("Image Url?")
         if(imageUrl){
-            db.collection("channels").doc(channelId).collection("messages").add({
+            db
+            .collection("messages")
+            .doc(chatId)
+            .collection("messages")
+            .add({
                 user: user,
                 imageUrl: imageUrl,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -89,33 +94,16 @@ function Chat() {
     return (
         
         <div className="chat-page">
-
             {
-                alertBox
-                ?
-                <Alert onSubmit={e => {e.preventDefault();
-                setAlertBox(false)}}>
-                    <p className="py-3"><strong>Send this link to a friend:</strong></p>
-                    <p>{window.location.href+"invite/"+channelId}</p>
-                </Alert>
-                :
-                null
-            }
-
-            {
-                channelId
-                ?
                 <div className="chat-contents">
                     <div className="chat-header">
                         <div className="chat-title">
-                            <h6><strong>#{channelName}</strong></h6>
+                            <h6><strong>To {toUser}</strong></h6>
                             <label>This is the description.</label>
                         </div>
                         <div className="chat-details">
-                            <StarBorderIcon className="mr-3"/>
-                            <button onClick={() => setAlertBox(true)} className="btn btn-outline-primary">
-                                <GroupAddIcon className="mr-2"/>
-                                Invite
+                            <button onClick={() => dispatch(closeChat())} className="btn btn-outline-danger">                                
+                                Close
                             </button>
                         </div>
                     </div>
@@ -125,7 +113,7 @@ function Chat() {
                             messages.length
                             ?
                             messages.map(({id, messages: {message, imageUrl, timestamp, user}}) => {
-                                return <Message id={id} chatType={true} imageUrl={imageUrl} message={message} timestamp={timestamp} user={user}/>
+                                return <Message id={id} imageUrl={imageUrl} message={message} timestamp={timestamp} user={user}/>
                             })
 
                             :
@@ -137,7 +125,7 @@ function Chat() {
                     </div>
 
                     <form onSubmit={sendMessage} className="chat-input px-3">
-                        <input className="chat-textbox" type="text" placeholder={`Send a message to #${channelName}`} value={message} onChange={e => setmessage(e.target.value)}/>
+                        <input className="chat-textbox" type="text" placeholder={`Send a message to ${toUser}`} value={message} onChange={e => setmessage(e.target.value)}/>
                         {
                             emoji
                             ?
@@ -157,11 +145,6 @@ function Chat() {
                             </div>
                         </div>
                     </form>
-                </div>
-                :
-                <div className="my-5">
-                    <img className="svg-icons" src="./images/Happy Bunch - Chat.png" alt="Select channel"/>
-                    <p>Select a channel</p>
                 </div>
             }
             

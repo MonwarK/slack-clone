@@ -3,7 +3,7 @@
     padding-bottom: 10px;
 }
 
-.chat-contents{
+.chat-contents{   
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -24,7 +24,6 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column-reverse;
-    width: 80vw;
     overflow-x: hidden;
 }
 

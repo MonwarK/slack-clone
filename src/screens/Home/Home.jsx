@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import NavBar from "../../components/NavBar/Navbar"
 import SideNav from "../../components/SideNav/SideNav"
+import { Route, Router, Switch, useHistory } from "react-router-dom"
 import { auth } from '../../firebase/Firebase'
+import DMs from "../DMs/DMs"
 import Chat from "../Chat/Chat"
 import "./Home.css"
 
 function Home({changeTheme}) {
 
     const [profile, setProfile] = useState(false)
+    const history = useHistory()
 
     const toggleProfile = () => {
         if(profile){
@@ -29,7 +32,7 @@ function Home({changeTheme}) {
                     <button className="btn btn-profile" onClick={changeTheme}>
                         Change Theme
                     </button>
-                    <button className="btn btn-profile" onClick={() => auth.signOut()}>
+                    <button className="btn btn-profile" onClick={() => {history.push("/"); auth.signOut();}}>
                         Sign out
                     </button>
                 </div>
@@ -37,7 +40,15 @@ function Home({changeTheme}) {
             }
             <div className="home-page">
                 <SideNav />
-                <Chat />
+                <Switch>
+                    <Route path="/" exact>
+                        <Chat chatType={true}/>
+                    </Route>
+                    <Route path="/messages" exact>
+                        <DMs />
+                    </Route>
+                </Switch> 
+              
             </div>
         </div>
     )
