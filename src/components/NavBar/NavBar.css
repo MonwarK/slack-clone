@@ -1,0 +1,28 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.search{
+    flex: 1;
+}
+
+.navbar-search{
+    border: 1px solid darkgray;
+    background-color: var(--input-color);
+    color: rgb(156, 88, 88);
+    padding: 2px 8px;
+    outline: none;
+    width: 50%;
+    border-radius: 4px;
+}
+
+.navbar-search::placeholder{
+    color: darkgray;
+}
+
+.profile-icon{
+    width: 45px;
+    cursor: pointer;
+    border-radius: 50%;
+}

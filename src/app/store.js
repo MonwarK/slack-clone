@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import userReducer from '../features/userSlice';
+import channelReducer from "../features/channelSlice";
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    user: userReducer,
+    channel: channelReducer
   },
 });

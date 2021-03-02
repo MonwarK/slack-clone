@@ -1,0 +1,44 @@
+.navigation{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title{
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-group{
+    list-style-type: none;
+    font-size: 12px;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.list-group li{
+    padding-top: 5px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.list-group li:hover{
+    background-color: var(--primary);
+    filter: brightness(0.9);
+}
+
+.channel-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.group-item{
+    flex: 1;
+    cursor: pointer;
+}
+
+.channel-item svg{
+    width: 18px;
+}

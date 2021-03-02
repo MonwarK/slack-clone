@@ -1,0 +1,17 @@
+.btn-sidenav{
+    background-color: var(--primary);
+    padding: 2px 25px;
+    width: 100%;
+    border: 0;
+    display: block;
+    color: #CDC0CD;
+    text-align: start;
+}
+
+.btn-sidenav:hover{
+    filter: brightness(0.9);
+}
+
+.btn-sidenav span{
+    margin-left: 20px;
+}

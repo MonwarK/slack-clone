@@ -1,39 +1,77 @@
-.App {
+body{
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.logo{
+  width: 50%;
+  max-width: 200px;
+  margin-top: 20px;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
+.MuiSvgIcon-root{
+  cursor: pointer;
+  margin-bottom: 3px;
+  overflow-y: auto;
 }
 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.mw-500{
+  max-width: 500px;
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+.w-95{
+  width: 95%;
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px)
-  }
-  100% {
-    transform: translateY(0px)
-  }
+.darktheme{
+  --primary: #035B96;
+  --secondary: #04396C;
+  --input-colour: #6497B1;
+  transition: 500ms;
+}
+
+.lighttheme{
+  --primary: #3F0E40;
+  --secondary: #541356;
+  transition: 500ms;
+}
+
+.svg-icons{
+  width: 100px;
+  margin: 25px 0;
+}
+
+::-webkit-scrollbar{
+  filter: brightness(0.8);
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius: 20px;
+  width: 3px;
+  border: 10px solid transparent;
+  background-color: #4c4c4c;
+}
+
+.primary{
+  background-color: var(--primary);
+  color: #CDC0CD;
+}
+
+.secondary{
+  background-color: var(--secondary);
+  color: #CDC0CD;
+}
+
+.input-color{
+  background-color: var(--input-color);
+}
+
+.btn-theme{
+  position: absolute;
+  left: 50px;
+  margin: auto;
+}
+
+.icon{
+  width: 20px;
 }

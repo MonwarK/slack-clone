@@ -1,0 +1,30 @@
+.home-page{
+    flex: 1;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profile-info{
+    top: 40px;
+    right: 20px;
+    position: absolute;
+    margin: auto;
+    height: 150px;
+    width: 200px;
+}
+
+.btn-profile{
+    text-align: left;
+}
+
+.btn-profile:hover{
+    background-color: #f9f9f9;
+}
