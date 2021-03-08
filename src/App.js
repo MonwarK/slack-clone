@@ -13,10 +13,13 @@ import Invite from "./screens/AcceptInvite/Loading"
 import { closeChannel } from './features/channelSlice';
 
 function App() {
+
+  
+  const sessionTheme = sessionStorage.getItem('theme');
   const user = useSelector(selectUser)
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
-  const [theme, setTheme] = useState(false)
+  const [theme, setTheme] = useState(sessionTheme==="true"?true:false)
 
   useEffect(() => {
 
@@ -45,22 +48,19 @@ function App() {
   }, [dispatch])
 
   const changeTheme = () => {
-    const page = document.getElementById("slackClone");
     if(theme){
-      page.classList.remove("darktheme")
-      page.classList.add("lighttheme")
+      sessionStorage.setItem('theme', false);
       setTheme(false)
     }
     else{
-      page.classList.remove("lighttheme")
-      page.classList.add("darktheme")
+      sessionStorage.setItem('theme', true);
       setTheme(true)
     }
   }
 
   return (
     <BrowserRouter>
-      <div id="slackClone" className="lighttheme">
+      <div id="slackClone" className={theme?"darktheme":"lighttheme"}>
         {
           loading?
             <Loading />
@@ -85,6 +85,9 @@ function App() {
                 <Home changeTheme={changeTheme} />
               </Route>
               <Route path="/messages" exact>
+                <Home changeTheme={changeTheme} />
+              </Route>
+              <Route path="/users" exact>
                 <Home changeTheme={changeTheme} />
               </Route>
               <Route path="/invite/:groupCode" component={Invite}/>

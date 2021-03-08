@@ -19,6 +19,7 @@
     margin: auto;
     height: 150px;
     width: 200px;
+    z-index: 5;
 }
 
 .btn-profile{

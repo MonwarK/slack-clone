@@ -26,13 +26,14 @@ body{
 .darktheme{
   --primary: #035B96;
   --secondary: #04396C;
-  --input-colour: #6497B1;
+  --input-colour: #10425b;
   transition: 500ms;
 }
 
 .lighttheme{
   --primary: #3F0E40;
   --secondary: #541356;
+  --input-colour: #515151;
   transition: 500ms;
 }
 

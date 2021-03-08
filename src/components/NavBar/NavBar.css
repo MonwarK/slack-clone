@@ -23,6 +23,8 @@
 
 .profile-icon{
     width: 45px;
+    height: 45px;
     cursor: pointer;
     border-radius: 50%;
+    padding: 3px;
 }

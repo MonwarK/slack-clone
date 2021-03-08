@@ -43,7 +43,7 @@ function SideNav() {
 
     useEffect(() => {
         setusers(channels.filter(({channel: {users}}) => {
-            return users.includes(auth.currentUser.uid)
+            return users.includes(auth.currentUser?.uid)
         }))
     }, [channels])
 
@@ -104,8 +104,8 @@ function SideNav() {
                         <span>Save Items</span>
                     </SideButton>
 
-                    <SideButton>
-                        <PeopleIcon />
+                    <SideButton link={() => { dispatch(closeChat()); history.push("/users")}}>
+                        <PeopleIcon/>
                         <span>People & Groups</span>
                     </SideButton>
 
@@ -137,6 +137,7 @@ function SideNav() {
                                         channel.users[0] === auth.currentUser.uid 
                                         ?
                                         <DeleteIcon 
+                                            className="mr-2"
                                             onClick={
                                                 () => {
                                                     alert(channel.channelName + " has been deleted")

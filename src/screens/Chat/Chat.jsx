@@ -3,7 +3,7 @@ import firebase from "firebase"
 import "./Chat.css"
 import { useSelector } from 'react-redux';
 import { db } from '../../firebase/Firebase';
-import { selectChannelId, selectChannelName, selectChannelUsers } from '../../features/channelSlice';
+import { selectChannelId, selectChannelName } from '../../features/channelSlice';
 import { selectUser } from '../../features/userSlice';
 import Message from "../../components/Message/Message"
 import SendIcon from '@material-ui/icons/Send';
@@ -46,7 +46,7 @@ function Chat() {
             )
         })
 
-    }, channelId)
+    }, [channelId])
 
     const sendMessage = e => {
 

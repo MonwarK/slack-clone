@@ -24,7 +24,7 @@ function Register() {
             .then(userAuth => {
                 userAuth.user.updateProfile({
                     displayName:name,
-                    photoURL: "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg"
+                    photoURL: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
                 });
                 auth.signOut()
             })

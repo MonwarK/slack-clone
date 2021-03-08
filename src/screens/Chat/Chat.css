@@ -10,6 +10,10 @@
     height: 100%;
 }
 
+.chat-messages::-webkit-scrollbar{
+    display: none;
+}
+
 .chat-header{
     display: flex;
     justify-content: space-between;

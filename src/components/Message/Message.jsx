@@ -71,7 +71,7 @@ function Message({id, user, imageUrl, timestamp, message, chatType}) {
                 alertBox?
                 <AlertMessage onSubmit={() => setAlertBox(false)}>
                     <div className="alert-profile">
-                        <img src={user.pfp} alt={user.name} />
+                        <img height="100" src={user.pfp} alt={user.name} />
                         <div className="alert-details ml-2">
                             <h4 onClick={() => setAlertBox(true)}>{user.name}</h4>
                             <br />

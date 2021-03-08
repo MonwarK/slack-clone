@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import NavBar from "../../components/NavBar/Navbar"
 import SideNav from "../../components/SideNav/SideNav"
-import { Route, Router, Switch, useHistory } from "react-router-dom"
+import { Route, Switch, useHistory } from "react-router-dom"
 import { auth } from '../../firebase/Firebase'
 import DMs from "../DMs/DMs"
 import Chat from "../Chat/Chat"
+import UserPage from "../Users/User"
 import "./Home.css"
 
 function Home({changeTheme}) {
@@ -20,14 +21,29 @@ function Home({changeTheme}) {
         }
     }
 
+    const changeProfilePicture = () => {
+        var imageUrl = prompt("Enter image URL");
+
+        if(imageUrl){        
+            auth.currentUser.updateProfile({
+                photoURL: imageUrl
+            })
+
+            alert("You will now have to relog.")
+
+            auth.signOut()
+            history.push("/")
+        }
+    }
+
     return (
         <div className="home-container">
             <NavBar toggleProfile={toggleProfile}/>
             {
                 profile?
                 <div className="profile-info card py-3">
-                    <button className="btn btn-profile">
-                        Edit Profile
+                    <button className="btn btn-profile" onClick={changeProfilePicture}>
+                        Edit Avatar
                     </button>
                     <button className="btn btn-profile" onClick={changeTheme}>
                         Change Theme
@@ -46,6 +62,9 @@ function Home({changeTheme}) {
                     </Route>
                     <Route path="/messages" exact>
                         <DMs />
+                    </Route>
+                    <Route path="/users" exact>
+                        <UserPage />
                     </Route>
                 </Switch> 
               

@@ -35,6 +35,7 @@ function DirectMessagesList() {
         <div className="direct-message">
             <h3 className="text-center py-3">All DMs</h3>
             <hr />
+            <div className="direct-message-list">
             {
                 messages
                 ?
@@ -58,6 +59,7 @@ function DirectMessagesList() {
                 :
                 null
             }
+            </div>            
         </div>
     )
 }

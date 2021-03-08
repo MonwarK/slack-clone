@@ -3,7 +3,6 @@ import firebase from "firebase"
 import "./Chat.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../../firebase/Firebase';
-import { selectChannelId, selectChannelName, selectChannelUsers } from '../../features/channelSlice';
 import { selectUser } from '../../features/userSlice';
 import Message from "../../components/Message/Message"
 import SendIcon from '@material-ui/icons/Send';
@@ -43,7 +42,7 @@ function Chat() {
             )
         })
 
-    }, chatId)
+    }, [chatId])
 
     const sendMessage = e => {
 
@@ -99,7 +98,6 @@ function Chat() {
                     <div className="chat-header">
                         <div className="chat-title">
                             <h6><strong>To {toUser}</strong></h6>
-                            <label>This is the description.</label>
                         </div>
                         <div className="chat-details">
                             <button onClick={() => dispatch(closeChat())} className="btn btn-outline-danger">                                

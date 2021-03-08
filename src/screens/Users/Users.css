@@ -1,0 +1,40 @@
+.users-page{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.users-page::-webkit-scrollbar{
+    display: none;
+}
+
+.user-card{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 1px lightgray solid;
+    padding: 20px 0;
+    background-color: white;
+}
+
+.user-card:hover{
+    filter: brightness(0.9);
+    cursor: pointer;    
+}
+
+.user-profile{
+    height: 75px;
+    width: 75px;
+    border-radius: 10px;
+}
+
+.user-name{
+    flex:1;
+    text-align: left;
+}
+
+.user-list{
+    flex: 1;
+}
