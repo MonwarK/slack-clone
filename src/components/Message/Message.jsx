@@ -93,7 +93,7 @@ function Message({id, user, imageUrl, timestamp, message, chatType}) {
                         {
                             imageUrl
                             ?
-                            <img height="300" src={imageUrl} alt={"Image sent by " + user.name} />
+                            <img className="message-photo" src={imageUrl} alt={"Image sent by " + user.name} />
                             :
                             null
                         }

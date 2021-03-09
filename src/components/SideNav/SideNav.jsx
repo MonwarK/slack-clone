@@ -19,7 +19,7 @@ import alert from '../Alert/Alert';
 import { useHistory } from 'react-router-dom';
 import { closeChat } from '../../features/dmSlice';
 
-function SideNav() {
+function SideNav({sideNav, toggleSideNav}) {
 
     const dispatch = useDispatch();
     const [channels, setchannels] = useState([])
@@ -65,7 +65,7 @@ function SideNav() {
     }
 
     return (
-        <div className="primary side-nav text-left">
+        <div className={`primary side-nav text-left ${sideNav?`open`:`closed`}`}>
             
             {
                 alertBox
@@ -80,7 +80,7 @@ function SideNav() {
                 null
             }
 
-            <div className="navigation">          
+            <div className={`navigation ${sideNav?`open`:`closed`}`}>          
                 <h4 className="mt-3 text-center">Slack Clone</h4>  
 
                 <div className="my-3">
@@ -89,7 +89,13 @@ function SideNav() {
                         <span>Thread</span>
                     </SideButton>
 
-                    <SideButton link={() => { dispatch(closeChat()); history.push("/messages")}}>
+                    <SideButton link={
+                        () => { 
+                                dispatch(closeChat()); 
+                                history.push("/messages")
+                                toggleSideNav()
+                            }
+                        }>
                         <InboxIcon />
                         <span>All DMs</span>
                     </SideButton>
@@ -104,7 +110,12 @@ function SideNav() {
                         <span>Save Items</span>
                     </SideButton>
 
-                    <SideButton link={() => { dispatch(closeChat()); history.push("/users")}}>
+                    <SideButton link={
+                        () => { 
+                            dispatch(closeChat()); 
+                            history.push("/users");
+                            toggleSideNav();
+                        }}>
                         <PeopleIcon/>
                         <span>People & Groups</span>
                     </SideButton>
@@ -127,11 +138,16 @@ function SideNav() {
                                 return <li className="my-1 channel-item" onClick={() => history.push("/")}>
                                     <label
                                         className="group-item mx-3"
-                                        onClick={() => dispatch(setChannel({
-                                        channelId: id,
-                                        channelName: channel.channelName,
-                                        channelUsers: users.length
-                                    }))}
+                                        onClick={
+                                            () => {
+                                                dispatch(setChannel({
+                                                    channelId: id,
+                                                    channelName: channel.channelName,
+                                                    channelUsers: users.length
+                                                }))
+                                                toggleSideNav()    
+                                            }
+                                    }
                                     ># {channel.channelName}</label>
                                     {
                                         channel.users[0] === auth.currentUser.uid 

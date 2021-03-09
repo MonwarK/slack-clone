@@ -29,3 +29,13 @@
 .btn-profile:hover{
     background-color: #f9f9f9;
 }
+
+@media (max-width: 800px){
+    .home-page{
+        width: 100%;
+    }
+
+    .overflow-none{
+        overflow: hidden;
+    }
+}

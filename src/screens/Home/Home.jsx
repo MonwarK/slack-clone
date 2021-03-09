@@ -11,6 +11,7 @@ import "./Home.css"
 function Home({changeTheme}) {
 
     const [profile, setProfile] = useState(false)
+    const [sideNav, setSideNav] = useState(true)
     const history = useHistory()
 
     const toggleProfile = () => {
@@ -19,6 +20,14 @@ function Home({changeTheme}) {
         } else {
             setProfile(true)
         }
+    }
+
+    const changeSideNav = () => {
+        sideNav
+        ?
+        setSideNav(false)
+        :
+        setSideNav(true)
     }
 
     const changeProfilePicture = () => {
@@ -37,8 +46,8 @@ function Home({changeTheme}) {
     }
 
     return (
-        <div className="home-container">
-            <NavBar toggleProfile={toggleProfile}/>
+        <div className={`home-container ${sideNav?`overflow-none`:null}`}>
+            <NavBar sideNav={sideNav} toggleSideNav={changeSideNav} toggleProfile={toggleProfile}/>
             {
                 profile?
                 <div className="profile-info card py-3">
@@ -55,7 +64,7 @@ function Home({changeTheme}) {
                 :null
             }
             <div className="home-page">
-                <SideNav />
+                <SideNav sideNav={sideNav} toggleSideNav={changeSideNav}/>
                 <Switch>
                     <Route path="/" exact>
                         <Chat chatType={true}/>

@@ -15,7 +15,7 @@ import { closeChannel } from './features/channelSlice';
 function App() {
 
   
-  const sessionTheme = sessionStorage.getItem('theme');
+  const sessionTheme = localStorage.getItem('theme');
   const user = useSelector(selectUser)
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
@@ -49,11 +49,11 @@ function App() {
 
   const changeTheme = () => {
     if(theme){
-      sessionStorage.setItem('theme', false);
+      localStorage.setItem('theme', false);
       setTheme(false)
     }
     else{
-      sessionStorage.setItem('theme', true);
+      localStorage.setItem('theme', true);
       setTheme(true)
     }
   }
